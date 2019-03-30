@@ -22,7 +22,8 @@ for i in range(len(lines)):
 
     x = int(line[0])
     y = int(line[1])
-    samplemap[x] = dict()
+    if x not in samplemap:
+        samplemap[x] = dict()
     if twoHeads:
         samplemap[x][y] = HeadType.AB
     elif firstHead == 'A':
@@ -83,12 +84,9 @@ while not finished:
     for key1, item1 in samplemap.items():
         for key2, item2 in item1.items():
             used = False
-            for x in checkedx:
-                for y in checkedy:
-                    if x == key1 and y == key2:
-                        used = True
-                        break
-                if used:
+            for i in range(len(checkedx)):
+                if checkedx[i] == key1 and checkedy[i] == key2:
+                    used = True
                     break
             if not used:
                 prevx = currx
